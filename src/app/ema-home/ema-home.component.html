@@ -1,0 +1,81 @@
+<div class="main" fxLayout="column" fxGap="10">
+  <h2 class="title">Monthly details..</h2>
+
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="Date">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let dataSource">{{dataSource.date | date}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Item">
+      <mat-header-cell *matHeaderCellDef>Item</mat-header-cell>
+      <mat-cell *matCellDef="let dataSource">{{dataSource.item}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Price">
+      <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+      <mat-cell *matCellDef="let dataSource">{{dataSource.price}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Quantity">
+      <mat-header-cell *matHeaderCellDef>Quantity</mat-header-cell>
+      <mat-cell *matCellDef="let dataSource">{{dataSource.quantity}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Total">
+      <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+      <mat-cell *matCellDef="let dataSource">{{dataSource.price * dataSource.quantity}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Action">
+      <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+      <mat-cell *matCellDef="let dataSource"><a [routerLink]="" (click)="deleteRow(dataSource.id)">Delete</a></mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+  </mat-table>
+  <span style="float:right;margin-right:465px" class="text-success">Total:{{total}}</span>
+  <div style="margin-top: 100px">
+    <form #myform="ngForm" (ngSubmit)="AddExpenditures(myform.form)">
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+        <tr>
+          <td>
+              <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+          </td>
+          <td><mat-form-field>
+              <input matInput placeholder="Item">
+            </mat-form-field>
+          </td>
+          <td>
+              <mat-form-field>
+                  <input matInput placeholder="Price">
+                </mat-form-field>
+          </td>
+          <td>
+              <mat-form-field>
+                  <input matInput placeholder="Quantity">
+                </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td><button class="btn btn-primary btn-sm" type="submit">Submit</button></td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      <input type="submit" value="Register">
+    </form>
+    <!-- <button class="btn btn-sm btn-primary" (click)="AddExpenditures($event);">Add</button> -->
+
+  </div>
+</div>

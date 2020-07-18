@@ -8,11 +8,7 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "sass"
-        }
-      },
+      "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -27,9 +23,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -84,7 +84,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.sass"
+              "../node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles.css"
             ],
             "scripts": [],
             "assets": [
@@ -137,4 +138,4 @@
     }
   },
   "defaultProject": "Expenditure"
-}
+  }
